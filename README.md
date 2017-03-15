@@ -1,5 +1,5 @@
 # Tic Tac Toe Game
 
-mini game: tic tac toe. assignment for freecodecamp's frontend certification.
+tic tac toe mini game. assignment for freecodecamp's frontend certification. assignment for freecodecamp's frontend certification.
 
-[Demo](https://blackmesacode.github.io/freecodecamp-/)
+[Demo](https://blackmesacode.github.io/freecodecamp-tictactoe/)
