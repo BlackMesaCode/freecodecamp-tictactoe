@@ -18,7 +18,7 @@ export default class SelectMode extends React.Component {
     render() {
         return (
             <div>
-                <h3>Please select your mark:</h3>
+                <h3>Player1 please select your mark:</h3>
                 <div className="radio-buttons">
                     <label>
                         <input type="radio" name="mark" value="x" onChange={this.changeMark.bind(this)} checked={this.state.mark === "x"} />
@@ -29,6 +29,7 @@ export default class SelectMode extends React.Component {
                         <span>O</span>
                     </label>
                 </div>
+                <Link to={`/SelectMode/${this.props.match.params.mode}`}>Back</Link>
                 <Link to={`/Play/${this.props.match.params.mode}/${this.state.mark}`}>Start Game</Link>
             </div>
         );
