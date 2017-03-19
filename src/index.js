@@ -16,9 +16,9 @@ ReactDOM.render((
     <Router>
         <App>
             <Route exact path="/" component={SelectMode}/>
-            <Route path="/SelectMode" component={SelectMode}/>
+            <Route path="/SelectMode/" component={SelectMode}/>
             <Route path="/SelectMark/:mode" component={SelectMark}/>
-            <Route path="/Play" component={Play}/>
+            <Route path="/Play/:mode/:mark" component={Play}/>
         </App>
     </Router>)
 , document.getElementById("app"));
