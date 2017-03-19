@@ -14,8 +14,7 @@ export default class PlayingField extends React.Component {
                             { 
                                 row.map((col, colIndex) => 
                                     <div className="col" key={colIndex} onClick={this.props.move.bind(this, rowIndex, colIndex)}>
-                                        {rowIndex}
-                                        {colIndex}
+                                        {this.props.placements[rowIndex][colIndex]}
                                     </div>
                                 )
                             }

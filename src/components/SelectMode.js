@@ -29,7 +29,10 @@ export default class SelectMode extends React.Component {
                         <span>2 Players</span>
                     </label>
                 </div>
-                <Link to={`/SelectMark/${this.state.mode}`}>Next</Link>
+                <div className="navigation-buttons">
+                    <span></span>
+                    <Link to={`/SelectMark/${this.state.mode}`}><i className="fa fa-arrow-right"></i></Link>
+                </div>
             </div>
         );
     }

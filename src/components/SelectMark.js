@@ -29,8 +29,10 @@ export default class SelectMode extends React.Component {
                         <span>O</span>
                     </label>
                 </div>
-                <Link to={`/SelectMode/${this.props.match.params.mode}`}>Back</Link>
-                <Link to={`/Play/${this.props.match.params.mode}/${this.state.mark}`}>Start Game</Link>
+                <div className="navigation-buttons">
+                    <Link to={`/SelectMode/${this.props.match.params.mode}`}><i className="fa fa-arrow-left"></i></Link>
+                    <Link to={`/Play/${this.props.match.params.mode}/${this.state.mark}`}><i className="fa fa-arrow-right"></i></Link>
+                </div>
             </div>
         );
     }

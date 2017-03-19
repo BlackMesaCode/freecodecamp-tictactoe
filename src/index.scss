@@ -2,6 +2,7 @@
 @import "../node_modules/boilerplate-styles/styles/boilerplate.scss";
 
 body {
+    font-family: 'Roboto Condensed', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,8 +12,16 @@ body {
 
 
 #app {
-    padding: 3rem;
     background-color: $white;
+    text-align: center;
+    width: 20rem;
+}
+
+h1 {
+    background-color: $black;
+    color: white;
+    padding: 1rem 2rem;
+    margin: 0;
 }
 
 
@@ -31,23 +40,69 @@ body {
     span {
         cursor: pointer;
         background-color: $white;
-        padding: 4px 7px;
+        padding: 0.2rem 1rem;
     }
 }
 
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+
+    a {
+        color: $black;
+        text-decoration: none;
+    }
+}
+
+#message-box {
+    border-style: solid;
+    border-color: $black;
+
+    border-width: 0 1px 0 1px;
+    padding: 1rem 0;
+    margin: 0;
+}
 
 #grid {
-    background-color: red;
+    width: 20rem;
+    height: 20rem;
+    background-color: $white;
+    display: flex;
+    flex-direction: column;
+
+    border-style: solid;
+    border-color: $black;
+
+    border-width: 1px 0  0 1px;
 
     .row {
+        flex-grow: 1;
+        flex-basis: 33.3%;
+
         display: flex;
+
+        .col {
+            font-size: 3rem;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-style: solid;
+            border-color: $black;
+
+            border-width: 0 1px 1px 0;
+            flex-basis: 33.3%;
+
+            &:hover {
+                background-color: $orange;
+                cursor: pointer;
+            }
+        }
+        
     }
 }
-
-
-
-
-
 
 
 #profiles {
