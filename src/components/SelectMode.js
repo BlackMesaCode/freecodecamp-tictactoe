@@ -17,7 +17,7 @@ export default class SelectMode extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="page">
                 <h3>Please select a game mode:</h3>
                 <div className="radio-buttons">
                     <label>

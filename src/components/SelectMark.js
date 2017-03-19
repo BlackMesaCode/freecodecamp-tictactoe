@@ -17,7 +17,7 @@ export default class SelectMode extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="page">
                 <h3>Player1 please select your mark:</h3>
                 <div className="radio-buttons">
                     <label>

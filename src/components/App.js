@@ -10,6 +10,7 @@ export default class App extends React.Component {
             <div>
                 <h1>Tic Tac Toe</h1>
                 {this.props.children}
+                <p></p>
             </div>
         );
     }
