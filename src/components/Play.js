@@ -1,6 +1,7 @@
 import React from "react";
 import PlayingField from "./PlayingField";
 import Computations from "./Computations";
+import {Link} from "react-router-dom";
 
 export default class Play extends React.Component {
     constructor(props) {
@@ -22,22 +23,19 @@ export default class Play extends React.Component {
 
     }
 
+    initPlacements() { return [ [ "", "", ""], [ "", "", ""], [ "", "", ""] ]; }
+
     componentDidMount() {
-
-
         // if we play vs the computer and the computer may start, we kick of the first move here
-        if (this.mode === "1p" && this.state.currentPlayer === this.player2) {
-            let placement = this.computations.getNextComputerPlacement();
-            this.move(placement[0], placement[1], true);
-        }
+        this.computerMove();
     }
 
-    initPlacements() {
-        return [ [ "", "", ""], [ "", "", ""], [ "", "", ""] ];
+    componentDidUpdate() {
+        // auto trigger computers move after a short timespan
+        this.computerMove();
     }
 
-    getRandomPlayer() { return Math.floor(Math.random()) === 1 ? this.player1 : this.player2 }
-
+    getRandomPlayer() { return Math.round(Math.random()) === 1 ? this.player1 : this.player2 }
 
     move(row, col, isComputer) {
 
@@ -61,13 +59,14 @@ export default class Play extends React.Component {
         let nextPlayer = this.state.currentPlayer === this.player1 ? this.player2 : this.player1;
 
         // check if current move finished the game
-        let hasWon = this.computations.hasWon(row, col, this.state.currentPlayer.mark);
+        let winningTrio = this.computations.hasWon(row, col, this.state.currentPlayer.mark);
         // console.log("hasWon?", hasWon);
-        if (hasWon) {
+        if (winningTrio) {
             // console.log("winner of the game:", this.state.currentPlayer)
             // update state to show a winning message and deactivate playing field
             this.setState({ 
-                winner: this.state.currentPlayer
+                winner: this.state.currentPlayer,
+                winningTrio: winningTrio
             });
         }
         else {
@@ -87,29 +86,31 @@ export default class Play extends React.Component {
         });
     }
 
-    componentDidUpdate() {
-
-        // auto trigger computers move after a short timespan
+    computerMove() {
         if (this.mode === "1p" && this.state.currentPlayer === this.player2 && !this.state.winner && !this.state.tie) {
             setTimeout(function() {
                 let placement = this.computations.getNextComputerPlacement();
                 this.move(placement[0], placement[1], true);
             }.bind(this), 300)
         }
-
     }
+
 
 
     render() {
         return (
-            <div>
+            <div className="page">
                 <p id="message-box">
                     {
                         this.state.winner ? (this.state.winner.displayName + " has won the game!") : 
-                        this.state.tie ? "Tie" : this.state.currentPlayer.displayName + " - Its your turn!"
+                        this.state.tie ? "It's a tie!" : this.state.currentPlayer.displayName + " - Its your turn!" 
+                    }
+                    {
+                        (this.state.winner || this.state.tie) ? <Link id="replay" to="/"><i className="fa fa-refresh"></i> Replay?</Link> : ""
                     }
                 </p>
-                <PlayingField placements={this.state.placements} move={this.move.bind(this)} />
+                <PlayingField placements={this.state.placements} move={this.move.bind(this)} 
+                        winningTrio={this.state.winningTrio} winner={this.state.winner} tie={this.state.tie} />
             </div>
         );
     }

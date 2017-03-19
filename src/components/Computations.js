@@ -131,39 +131,47 @@ export default class Computations {
     allRowsInCol(col, mark) { // check rows for the supplied col
         for (let row = 0; row < 3; row++) {
             if (this.placements[row][col] !== mark)
-                return false;
+                return undefined;
         }
-        return true;
+        return [[0,col],[1,col],[2,col]];
     }
 
     allColsInRow(row, mark) { // check cols for the supplied row
         for (let col = 0; col < 3; col++) {
             if (this.placements[row][col] !== mark)
-                return false;
+                return undefined;
         }
-        return true;
+        return [[row,0],[row,1],[row,2]];
     }
 
     allInDiagonal(mark) {
         for(let i = 0; i < 3; i++){
             if(this.placements[i][i] != mark)
-                return false;
+                return undefined;
         }
-        return true;
+        return [[0,0],[1,1],[2,2]];
     }
 
     allInAntiDiagonal(mark) {
         for(let i = 0; i < 3; i++){
             if(this.placements[i][2-i] != mark)
-                return false;
+                return undefined;
         }
-        return true;
+        return [[2,0],[1,1],[0,2]];
     }
 
-    hasWon(row, col, mark) { // return the mark of the player if he has a triplet on the playing field
-        if (this.allRowsInCol(col, mark) || this.allColsInRow(row, mark) || this.allInDiagonal(mark) || this.allInAntiDiagonal(mark))
-            return true;
-        return false;
+    hasWon(row, col, mark) { // checks if last row,col placement resulted in a win for player with mark
+        let allColsInRow = this.allColsInRow(row, mark);
+        if (allColsInRow) return allColsInRow;
+
+        let allRowsInCol = this.allRowsInCol(col, mark);
+        if (allRowsInCol) return allRowsInCol;
+        
+        let allInDiagonal = this.allInDiagonal(mark);
+        if (allInDiagonal) return allInDiagonal;
+        
+        let allInAntiDiagonal =  this.allInAntiDiagonal(mark);
+        if (allInAntiDiagonal) return allInAntiDiagonal;
     }
 
     getAllDuos(mark) {
